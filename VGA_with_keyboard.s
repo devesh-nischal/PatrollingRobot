@@ -34,7 +34,7 @@ TOP_LINE:
 
 	movui r17, 0xf800		#red
 	movui r20, 0x0082		#130 (starting x address)
-	movui r23, 0x00a0		#160 (ending x address)
+	movui r23, 0x00be		#160 (ending x address)
 	
 BOTTOM_LINE:
 	movui r21, 0x007d		#225 (constant y address)
@@ -88,6 +88,21 @@ RIGHT_LINE:
 	addi r20, r20, 0x01
 	bne r20, r23, RIGHT_LINE
 
+	movui r17, 0x004d		#ascii for 'M'
+	sthio r17, 11(r19)	#3874
+/*
+	movui r17, 0x006f		#ascii for 'o'
+	sthio r17, 21(r19)	#3875
+
+	movui r17, 0x0064		#ascii for 'd'
+	sthio r17, 23(r19)	#3876
+
+	movui r17, 0x0065		#ascii for 'e'
+	sthio r17, 25(r19)	#3877
+
+	movui r17, 0x003a		#ascii for ':'
+	sthio r17, 27(r19)	#3878
+*/
 LOOP:
     br LOOP
 	
