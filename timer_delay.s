@@ -3,8 +3,9 @@
 
 .global	timerDelay
 timerDelay:
+	wrctl  ctl0, r0
     #Prologue
-    subi sp, sp, 36
+    subi sp, sp, 40
     stw ra, 0(sp)     # save return address
     stw r16, 4(sp)    # save all the callee save registers
     stw r17, 8(sp)
@@ -14,7 +15,8 @@ timerDelay:
     stw r21, 24(sp)
     stw r22, 28(sp)
     stw r23, 32(sp)
-
+	stw ea, 36(sp)
+	
     #Body
     movia r16, 0xFF202000         # r16 contains the base address for the timer
     mov r17, r4
@@ -46,5 +48,8 @@ END:
     ldw r21, 24(sp)
     ldw r22, 28(sp)
     ldw r23, 32(sp)
-    addi sp, sp, 36   # flush stack
+	ldw ea, 36(sp)
+    addi sp, sp, 40   # flush stack
+	movi r24, 1
+    wrctl  ctl0, r24
     ret
